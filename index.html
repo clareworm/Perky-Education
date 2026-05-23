@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-MO" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>澳門柏萊教育中心 | 致力於每一個學生的學業夢想</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              navy: '#102A6B',     /* 品牌手冊中的皇室藍 */
+              coral: '#E05B49',    /* 溫暖珊瑚紅 */
+              gold: '#E0A838',     /* 智慧亮金/黃 */
+              cream: '#FDFBF7',    /* 優雅暖奶油背景 */
+              clay: '#8B5A2B',     /* 復古人文黏土棕 */
+              dark: '#1A202C'
+            }
+          },
+          fontFamily: {
+            sans: ['Noto Sans TC', 'Inter', 'sans-serif'],
+            serif: ['Playfair Display', 'Noto Serif TC', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Serif+TC:wght@500;700&display=swap" rel="stylesheet">
+  
+  <!-- Iconify-Icon -->
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+
+  <!-- GSAP with ScrollTrigger for Premium Scroll animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <style>
+    /* 復古紙張紋理 / 噪點濾鏡疊加效果 */
+    .grainy-bg {
+      background-color: #FDFBF7;
+      position: relative;
+    }
+    .grainy-bg::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      opacity: 0.04;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+    
+    /* 玻璃擬態磨砂 */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(16, 42, 107, 0.08);
+    }
+    
+    /* 插畫描邊復古感 */
+    .retro-border {
+      border: 2px solid #102A6B;
+      box-shadow: 4px 4px 0px #102A6B;
+    }
+    
+    .retro-border-interactive {
+      transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .retro-border-interactive:hover {
+      transform: translate(-3px, -3px);
+      box-shadow: 7px 7px 0px #102A6B;
+    }
+
+    /* SVG 手繪描邊動態初始值 */
+    .draw-path-target {
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 1000;
+    }
+
+    /* 隱藏滾動條 */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="grainy-bg font-sans text-brand-dark antialiased overflow-x-hidden selection:bg-brand-gold selection:text-brand-navy">
+
+  <!-- ==================== HEADER / NAV BAR ==================== -->
+  <header class="sticky top-0 z-50 glass-card transition-all duration-300 border-b border-brand-navy/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <!-- 品牌 Logo & 名稱 -->
+      <a href="#" class="flex items-center space-x-3 group">
+        <div class="w-12 h-12 rounded-full bg-brand-navy flex items-center justify-center retro-border-interactive">
+          <!-- 簡約智慧燈泡/學士帽 SVG -->
+          <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+          </svg>
+        </div>
+        <div>
+          <span class="font-serif text-xl sm:text-2xl font-bold tracking-tight text-brand-navy block">柏萊教育</span>
+          <span class="text-xs uppercase tracking-widest text-brand-coral block font-bold">PERKY EDUCATION</span>
+        </div>
+      </a>
+
+      <!-- 桌面導覽連結 -->
+      <nav class="hidden md:flex items-center space-x-8">
+        <a href="#services" class="text-brand-navy font-medium hover:text-brand-coral transition-colors">核心服務</a>
+        <a href="#features" class="text-brand-navy font-medium hover:text-brand-coral transition-colors">為什麼選擇我們</a>
+        <a href="#courses" class="text-brand-navy font-medium hover:text-brand-coral transition-colors">熱門課程</a>
+        <a href="#calculator" class="text-brand-navy font-medium hover:text-brand-coral transition-colors">學費精算</a>
+        <a href="#diagnostic" class="text-brand-navy font-medium hover:text-brand-coral transition-colors">在線學力測驗</a>
+      </nav>
+
+      <!-- 右側行動按鈕 -->
+      <div class="flex items-center space-x-4">
+        <a href="tel:+85362127420" class="hidden lg:flex items-center space-x-2 text-brand-navy font-semibold text-sm hover:text-brand-coral transition">
+          <iconify-icon icon="ph:phone-call-fill" class="text-lg text-brand-coral"></iconify-icon>
+          <span>(+853) 6212-7420</span>
+        </a>
+        <button onclick="openPromoModal()" class="px-5 py-2.5 bg-brand-coral text-white font-bold rounded-lg retro-border-interactive text-sm">
+          領取 $200 優惠
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== HERO SECTION ==================== -->
+  <section class="relative overflow-hidden pt-12 pb-20 lg:pt-20 lg:pb-32 bg-gradient-to-b from-brand-cream to-[#F5ECE0]/40">
+    <!-- 背景裝飾 SVG 幾何與手繪風漂浮物 (將透過 GSAP 緩緩擺動與隨滑鼠微動) -->
+    <div class="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+      <!-- 漂浮幾何 1 -->
+      <svg class="hero-shape absolute top-1/4 left-10 w-16 h-16 text-brand-coral/15" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2z"/></svg>
+      <!-- 漂浮圓形 2 -->
+      <svg class="hero-shape absolute top-1/3 right-12 w-20 h-20 text-brand-gold/20" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>
+      <!-- 漂浮矩形 3 -->
+      <svg class="hero-shape absolute bottom-1/4 left-1/4 w-12 h-12 text-brand-navy/10" fill="currentColor" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+      
+      <!-- 手繪風大螺旋裝飾 SVG - 帶有滾動時視差與路徑繪製效果 -->
+      <svg class="parallax-svg absolute right-10 bottom-10 w-72 h-72 text-brand-coral/10 select-none pointer-events-none" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path class="draw-path-target" stroke-linecap="round" d="M10,80 C30,90 80,80 70,50 C60,20 20,30 50,10 C70,-5 90,15 85,40" />
+      </svg>
+      
+      <!-- 手繪風左側波浪裝飾 SVG -->
+      <svg class="parallax-svg absolute left-5 top-1/2 w-48 h-48 text-brand-gold/15 select-none pointer-events-none" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+        <path class="draw-path-target" stroke-linecap="round" d="M0,50 Q25,25 50,50 T100,50" />
+      </svg>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        <!-- 左側文案 -->
+        <div class="lg:col-span-6 space-y-8 text-center lg:text-left">
+          <div class="inline-flex items-center space-x-2 bg-brand-gold/15 text-brand-navy px-4 py-1.5 rounded-full border border-brand-gold/40 text-sm font-semibold">
+            <iconify-icon icon="lucide:sparkles" class="text-brand-coral"></iconify-icon>
+            <span>澳門中小學課後首選｜專業一站式輔導</span>
+          </div>
+
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-serif font-black text-brand-navy leading-tight">
+            致力於每一個學生的<br>
+            <span class="text-brand-coral relative inline-block">
+              學業夢想
+              <!-- 手繪底線 (在滾動時將進行手繪路徑繪製) -->
+              <svg class="absolute left-0 -bottom-1 w-full h-4 text-brand-gold" viewBox="0 0 100 10" preserveAspectRatio="none">
+                <path class="draw-path-target" d="M0,7 Q50,2 100,7" stroke="currentColor" stroke-width="4" fill="none" stroke-linecap="round"/>
+              </svg>
+            </span>
+          </h1>
+
+          <p class="text-base sm:text-lg text-brand-dark/80 font-medium max-w-xl mx-auto lg:mx-0 leading-relaxed">
+            我們深耕澳門本地教育體系，獨創「本地課程深度掌握、個性化學習規劃、全程陪伴式教學」三大體系，助力小學至中學學子攻克知識盲點，成就自信未來。
+          </p>
+
+          <!-- 關鍵亮點徽章 -->
+          <div class="grid grid-cols-3 gap-3 max-w-md mx-auto lg:mx-0 pt-2">
+            <div class="bg-white/80 p-3 rounded-xl border border-brand-navy/5 text-center">
+              <span class="block text-xl sm:text-2xl font-bold text-brand-navy">90%</span>
+              <span class="text-xs text-brand-dark/70 font-medium">成績快速提升</span>
+            </div>
+            <div class="bg-white/80 p-3 rounded-xl border border-brand-navy/5 text-center">
+              <span class="block text-xl sm:text-2xl font-bold text-brand-coral">1對1 / 小班</span>
+              <span class="text-xs text-brand-dark/70 font-medium">極致精緻教學</span>
+            </div>
+            <div class="bg-white/80 p-3 rounded-xl border border-brand-navy/5 text-center">
+              <span class="block text-xl sm:text-2xl font-bold text-brand-gold">5人內</span>
+              <span class="text-xs text-brand-dark/70 font-medium">精緻人數管控</span>
+            </div>
+          </div>
+
+          <!-- CTA 按鈕群 -->
+          <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+            <a href="#diagnostic" class="w-full sm:w-auto px-8 py-4 bg-brand-navy text-white text-base font-bold rounded-xl retro-border-interactive text-center flex items-center justify-center space-x-2">
+              <iconify-icon icon="fluent:brain-circuit-24-regular" class="text-xl"></iconify-icon>
+              <span>預約免費 1 對 1 學力評估</span>
+            </a>
+            <a href="#courses" class="w-full sm:w-auto px-8 py-4 bg-white text-brand-navy text-base font-bold rounded-xl border-2 border-brand-navy hover:bg-brand-navy/5 transition-colors text-center">
+              瀏覽熱門課程
+            </a>
+          </div>
+
+          <!-- 承諾小語 -->
+          <p class="text-xs text-brand-navy/60 font-semibold italic flex items-center justify-center lg:justify-start space-x-1">
+            <iconify-icon icon="lucide:check-circle"></iconify-icon>
+            <span>憑宣傳單張/網頁預約即可獲：學力免費評估 & $200 學費減免券</span>
+          </p>
+        </div>
+
+        <!-- 右側精美大插畫 (融入 image_940780 的溫暖讀書小組意象) -->
+        <div class="lg:col-span-6 relative flex justify-center">
+          <div class="relative w-full max-w-md sm:max-w-lg">
+            <!-- 裝飾背景色塊 -->
+            <div class="absolute inset-0 bg-brand-gold rounded-3xl transform rotate-3 scale-95 opacity-20"></div>
+            <div class="absolute inset-0 bg-brand-coral rounded-3xl transform -rotate-3 scale-95 opacity-10"></div>
+            
+            <!-- 插圖容器 (使用 Unsplash 模擬 image_940780 的溫暖小組共學氛圍) -->
+            <div class="relative rounded-2xl overflow-hidden retro-border bg-white">
+              <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=1200" 
+                   alt="柏萊教育-學生小組共學輔導" 
+                   class="w-full h-[320px] sm:h-[400px] object-cover" />
+              <!-- 精緻飄浮圖卡 -->
+              <div class="absolute bottom-4 left-4 right-4 glass-card p-4 rounded-xl border border-white/40 flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                  <div class="w-10 h-10 rounded-full bg-brand-gold/20 flex items-center justify-center">
+                    <iconify-icon icon="ph:student-fill" class="text-2xl text-brand-gold"></iconify-icon>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-sm text-brand-navy">小班制精緻數學班</h4>
+                    <p class="text-xs text-brand-dark/70">中、英文部雙軌特設</p>
+                  </div>
+                </div>
+                <span class="text-xs font-bold px-2.5 py-1 bg-brand-coral text-white rounded-full">招生中</span>
+              </div>
+            </div>
+            
+            <!-- 另一張疊加的手繪風筆記圖 -->
+            <div class="absolute -top-6 -right-6 w-24 h-24 bg-brand-cream p-2 rounded-lg retro-border hidden sm:block transform rotate-12">
+              <svg class="w-full h-full text-brand-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CORE SERVICES ==================== -->
+  <section id="services" class="py-20 lg:py-28 bg-white border-y border-brand-navy/5 relative overflow-hidden">
+    <!-- 背景裝飾 SVG (滑動時會有繪製描邊特效) -->
+    <div class="absolute inset-0 pointer-events-none z-0">
+      <svg class="parallax-svg absolute left-10 top-10 w-64 h-64 text-brand-navy/5" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1">
+        <circle class="draw-path-target" cx="50" cy="50" r="40" stroke-dasharray="8" />
+      </svg>
+      <svg class="parallax-svg absolute right-5 bottom-5 w-80 h-80 text-brand-gold/10" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path class="draw-path-target" d="M10,10 L90,10 L90,90 L10,90 Z" />
+      </svg>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      
+      <!-- 區塊標題 -->
+      <div class="text-center max-w-3xl mx-auto space-y-4 mb-16 relative">
+        <span class="text-brand-coral font-bold uppercase tracking-wider text-sm block">OUR EXCELLENCE</span>
+        <h2 class="text-3xl sm:text-4xl font-serif font-bold text-brand-navy relative inline-block">
+          我們的核心輔導服務
+          <!-- 標題裝飾手繪小線條 -->
+          <svg class="absolute -right-12 top-0 w-8 h-8 text-brand-coral hidden sm:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path class="draw-path-target" stroke-linecap="round" d="M4,12 C12,4 12,20 20,12" />
+          </svg>
+        </h2>
+        <p class="text-brand-dark/70 font-medium">針對澳門學子的多元需求，量身打造三大升學與學力鞏固體系</p>
+      </div>
+
+      <!-- 三大服務卡片 -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- 服務 1: 中小學全科補習 -->
+        <div class="bg-brand-cream/40 p-8 rounded-2xl retro-border-interactive retro-border flex flex-col justify-between relative overflow-hidden group">
+          <div class="space-y-6">
+            <div class="w-14 h-14 rounded-xl bg-[#EBEFFA] flex items-center justify-center relative">
+              <iconify-icon icon="lucide:book-open" class="text-3xl text-brand-navy z-10"></iconify-icon>
+              <!-- 圓形背景擴展動畫 -->
+              <span class="absolute inset-0 rounded-xl bg-brand-navy/5 scale-100 group-hover:scale-110 transition duration-300"></span>
+            </div>
+            <div class="space-y-2">
+              <h3 class="text-2xl font-serif font-bold text-brand-navy">中小學全科補習</h3>
+              <p class="text-brand-dark/70 text-sm leading-relaxed">
+                涵蓋小學至中學所有核心學科。透過 1 對 1 及精緻小班，診斷個別知識盲點，穩紮穩打，告別學業焦慮。
+              </p>
+            </div>
+            <ul class="space-y-2.5 text-sm font-semibold text-brand-navy/80">
+              <li class="flex items-center space-x-2">
+                <iconify-icon icon="lucide:check" class="text-brand-coral"></iconify-icon>
+                <span>小學專項習慣與基礎建立</span>
+              </li>
+              <li class="flex items-center space-x-2">
+                <iconify-icon icon="lucide:check" class="text-brand-coral"></iconify-icon>
+                <span>初中、高中理科與語文專題強化</span>
+              </li>
+            </ul>
+          </div>
+          <button onclick="scrollToElement('diagnostic')" class="mt-8 text-sm font-bold text-brand-coral flex items-center space-x-1 group hover:underline">
+            <span>立即客製評估</span>
+            <iconify-icon icon="lucide:arrow-right" class="group-hover:translate-x-1 transition-transform"></iconify-icon>
+          </button>
+        </div>
+
+        <!-- 服務 2: 雅思 / PTE 專業英語 -->
+        <div class="bg-brand-cream/40 p-8 rounded-2xl retro-border-interactive retro-border flex flex-col justify-between relative overflow-hidden group">
+          <div class="space-y-6">
+            <div class="w-14 h-14 rounded-xl bg-[#FFF8EB] flex items-center justify-center relative">
+              <iconify-icon icon="mdi:certificate-outline" class="text-3xl text-brand-gold z-10"></iconify-icon>
+              <span class="absolute inset-0 rounded-xl bg-brand-gold/5 scale-100 group-hover:scale-110 transition duration-300"></span>
+            </div>
+            <div class="space-y-2">
+              <h3 class="text-2xl font-serif font-bold text-brand-navy">雅思 / PTE 專修</h3>
+              <p class="text-brand-dark/70 text-sm leading-relaxed">
+                聽、說、讀、寫全維度分項針對性訓練，精準剖析各類題型與提分關鍵技巧，助你順利取得海外名校通行證。
+              </p>
+            </div>
+            <ul class="space-y-2.5 text-sm font-semibold text-brand-navy/80">
+              <li class="flex items-center space-x-2">
+                <iconify-icon icon="lucide:check" class="text-brand-gold"></iconify-icon>
+                <span>高真模擬實戰與口說一對一測驗</span>
+              </li>
+              <li class="flex items-center space-x-2">
+                <iconify-icon icon="lucide:check" class="text-brand-gold"></iconify-icon>
+                <span>學術寫作獨家公式與精確批改</span>
+              </li>
+            </ul>
+          </div>
+          <button onclick="scrollToElement('diagnostic')" class="mt-8 text-sm font-bold text-brand-gold flex items-center space-x-1 group hover:underline">
+            <span>立即客製評估</span>
+            <iconify-icon icon="lucide:arrow-right" class="group-hover:translate-x-1 transition-transform"></iconify-icon>
+          </button>
+        </div>
+
+        <!-- 服務 3: 升學、保送 / 四校聯考 -->
+        <div class="bg-brand-cream/40 p-8 rounded-2xl retro-border-interactive retro-border flex flex-col justify-between relative overflow-hidden group">
+          <div class="space-y-6">
+            <div class="w-14 h-14 rounded-xl bg-[#FDECEB] flex items-center justify-center relative">
+              <iconify-icon icon="ph:medal" class="text-3xl text-brand-coral z-10"></iconify-icon>
+              <span class="absolute inset-0 rounded-xl bg-brand-coral/5 scale-100 group-hover:scale-110 transition duration-300"></span>
+            </div>
+            <div class="space-y-2">
+              <h3 class="text-2xl font-serif font-bold text-brand-navy">升學、保送與聯考</h3>
+              <p class="text-brand-dark/70 text-sm leading-relaxed">
+                專為澳門四校聯考、校際轉學及國內名校保送面試提供全方位護航。定制考點講義，提早卡位理想科系。
+              </p>
+            </div>
+            <ul class="space-y-2.5 text-sm font-semibold text-brand-navy/80">
+              <li class="flex items-center space-x-2">
+                <iconify-icon icon="lucide:check" class="text-brand-coral"></iconify-icon>
+                <span>四校聯考精準考古題真題集訓</span>
+              </li>
+              <li class="flex items-center space-x-2">
+                <iconify-icon icon="lucide:check" class="text-brand-coral"></iconify-icon>
+                <span>保送自薦信撰寫指導與模擬面試</span>
+              </li>
+            </ul>
+          </div>
+          <button onclick="scrollToElement('diagnostic')" class="mt-8 text-sm font-bold text-brand-coral flex items-center space-x-1 group hover:underline">
+            <span>立即客製評估</span>
+            <iconify-icon icon="lucide:arrow-right" class="group-hover:translate-x-1 transition-transform"></iconify-icon>
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== WHY CHOOSE US ==================== -->
+  <section id="features" class="py-20 lg:py-28 bg-[#F5ECE0]/30 relative overflow-hidden">
+    <!-- 滑動時背景畫出的手繪幾何連線 SVG -->
+    <div class="absolute inset-0 pointer-events-none z-0">
+      <svg class="w-full h-full text-brand-navy/5" viewBox="0 0 1440 800" fill="none" stroke="currentColor" stroke-width="2">
+        <path class="draw-path-target" d="M100,150 Q350,50 700,200 T1300,100" stroke-linecap="round" />
+        <path class="draw-path-target" d="M150,600 C450,700 850,500 1250,650" stroke-linecap="round" />
+      </svg>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <!-- 左側文案 -->
+        <div class="lg:col-span-5 space-y-6">
+          <span class="text-brand-coral font-bold uppercase tracking-wider text-sm block">WHY CHOOSE US</span>
+          <h2 class="text-3xl sm:text-4xl font-serif font-bold text-brand-navy relative">
+            為什麼家長與學生<br>一致選擇「柏萊教育」？
+            <!-- 裝飾手繪星星 SVG (滾動觸發) -->
+            <svg class="parallax-svg absolute -top-8 right-10 w-10 h-10 text-brand-gold" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z" />
+            </svg>
+          </h2>
+          <p class="text-brand-dark/70 leading-relaxed font-medium">
+            我們拒絕死記硬背的填鴨式教育，重視學生的內在邏輯養成與學習習慣建立。以溫馨共學環境（如我們在澳門南灣的精緻中心），提供最高規格的教學品質。
+          </p>
+
+          <!-- 家長好評引言 -->
+          <div class="p-6 bg-white rounded-2xl border border-brand-navy/10 shadow-sm space-y-4">
+            <div class="flex items-center space-x-1 text-brand-gold text-lg">
+              <iconify-icon icon="material-symbols:star"></iconify-icon>
+              <iconify-icon icon="material-symbols:star"></iconify-icon>
+              <iconify-icon icon="material-symbols:star"></iconify-icon>
+              <iconify-icon icon="material-symbols:star"></iconify-icon>
+              <iconify-icon icon="material-symbols:star"></iconify-icon>
+            </div>
+            <p class="text-sm italic font-medium text-brand-navy">
+              "自從孩子來到柏萊補習數學，不僅成績從及格邊緣提升到優等，上課時的英文數學雙語對應更幫他適應了國際班的步調。老師真的很有耐心，每天都感覺他進步了。"
+            </p>
+            <div class="flex items-center space-x-2 text-xs font-bold text-brand-dark/60">
+              <span>— 澳門聖羅撒家長 梁女士</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 右側三項核心承諾 -->
+        <div class="lg:col-span-7 space-y-6">
+          
+          <!-- 優勢 1 -->
+          <div class="flex flex-col sm:flex-row gap-6 p-6 bg-white rounded-2xl retro-border transition-all duration-300 hover:shadow-lg">
+            <div class="w-12 h-12 shrink-0 rounded-full bg-brand-gold/15 text-brand-gold flex items-center justify-center font-bold text-xl">
+              1
+            </div>
+            <div class="space-y-2">
+              <h3 class="text-xl font-bold text-brand-navy">本地課程深度掌握</h3>
+              <p class="text-sm text-brand-dark/70 leading-relaxed">
+                我們深耕澳門本地教育體系多年，熟練掌握四校聯考、IGCSE、A-Level等各類考試命題規律。針對每家學校（培正、聖羅撒、聯國等）學程進行精確的考點匹配與補強，讓學生少走冤枉路。
+              </p>
+            </div>
+          </div>
+
+          <!-- 優勢 2 -->
+          <div class="flex flex-col sm:flex-row gap-6 p-6 bg-white rounded-2xl retro-border transition-all duration-300 hover:shadow-lg">
+            <div class="w-12 h-12 shrink-0 rounded-full bg-brand-coral/15 text-brand-coral flex items-center justify-center font-bold text-xl">
+              2
+            </div>
+            <div class="space-y-2">
+              <h3 class="text-xl font-bold text-brand-navy">個性化專屬學習規劃</h3>
+              <p class="text-sm text-brand-dark/70 leading-relaxed">
+                每位學生入學即享免費一對一學力評估。我們不看單一分數，而是透過邏輯和習慣評估，為其量身訂製個人課表，密切跟進每個學習階段的吸收效率。
+              </p>
+            </div>
+          </div>
+
+          <!-- 優勢 3 -->
+          <div class="flex flex-col sm:flex-row gap-6 p-6 bg-white rounded-2xl retro-border transition-all duration-300 hover:shadow-lg">
+            <div class="w-12 h-12 shrink-0 rounded-full bg-brand-navy/10 text-brand-navy flex items-center justify-center font-bold text-xl">
+              3
+            </div>
+            <div class="space-y-2">
+              <h3 class="text-xl font-bold text-brand-navy">全程溫馨陪伴式教學</h3>
+              <p class="text-sm text-brand-dark/70 leading-relaxed">
+                我們提供從課前診斷、課中探究到課後成效反饋的閉環式鏈接。班級導師不僅解答學術難題，更傾聽學生成長心聲，成為家長最放心的「共學夥伴」。
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== HOT COURSES & SPOTLIGHT ==================== -->
+  <section id="courses" class="py-20 lg:py-28 bg-white border-t border-brand-navy/5 relative overflow-hidden">
+    <!-- 手繪網格與對角連線背景 (滑動動態) -->
+    <div class="absolute inset-0 pointer-events-none z-0">
+      <svg class="parallax-svg absolute right-1/4 top-10 w-96 h-96 text-brand-gold/10" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1">
+        <path class="draw-path-target" d="M10,50 Q50,90 90,50 T10,50" />
+      </svg>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      
+      <!-- 頂部標題與特設提示 -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+        <div class="space-y-4">
+          <span class="text-brand-gold font-bold uppercase tracking-wider text-sm block">POPULAR COURSES</span>
+          <h2 class="text-3xl sm:text-4xl font-serif font-bold text-brand-navy">熱門精選課程</h2>
+          <p class="text-brand-dark/70 font-medium">高人氣口碑保障，隨時預約，立即體驗優質輔導</p>
+        </div>
+        
+        <!-- 數學提升班專屬特色標記（已更新為：中/小學數學特訓班(中/英文部分班)） -->
+        <div class="bg-brand-navy text-white p-5 rounded-2xl retro-border max-w-sm flex items-center space-x-4 transition-transform duration-300 hover:scale-105">
+          <div class="w-12 h-12 shrink-0 rounded-full bg-brand-gold flex items-center justify-center">
+            <iconify-icon icon="mdi:math-compass" class="text-2xl text-brand-navy"></iconify-icon>
+          </div>
+          <div>
+            <h4 class="font-bold text-sm text-brand-gold">中/小學數學特訓班(中/英文部分班)</h4>
+            <p class="text-xs text-white/80 mt-1">精緻 5 人小班制，低至 $1,600/月！</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 課程清單網格 -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- 課程 1 -->
+        <div class="bg-[#FDFBF7] p-6 rounded-2xl border-2 border-brand-navy hover:-translate-y-1 transition duration-300 flex flex-col justify-between">
+          <div class="space-y-4">
+            <span class="inline-block px-3 py-1 bg-brand-navy/10 text-brand-navy text-xs font-bold rounded-md">1對1 / 精緻小班</span>
+            <h3 class="text-xl font-bold text-brand-navy">中小學全科特訓班</h3>
+            <p class="text-xs text-brand-dark/70 leading-relaxed">
+              全科無縫覆蓋，攻克弱點，培養自主學習習慣，夯實基礎。
+            </p>
+          </div>
+          <div class="pt-6 border-t border-brand-navy/10 mt-6 flex items-center justify-between">
+            <span class="text-xs text-brand-dark/60">自由選擇上課時間</span>
+            <span class="text-sm font-bold text-brand-coral">歡迎諮詢</span>
+          </div>
+        </div>
+
+        <!-- 課程 2 -->
+        <div class="bg-[#FDFBF7] p-6 rounded-2xl border-2 border-brand-navy hover:-translate-y-1 transition duration-300 flex flex-col justify-between">
+          <div class="space-y-4">
+            <span class="inline-block px-3 py-1 bg-brand-gold/15 text-brand-gold text-xs font-bold rounded-md">特設中、英文部</span>
+            <h3 class="text-xl font-bold text-brand-navy">中/小學數學特訓班</h3>
+            <p class="text-xs text-brand-dark/70 leading-relaxed">
+              針對性邏輯解題，中英雙語特設，全面突破聯考與校內進度。
+            </p>
+          </div>
+          <div class="pt-6 border-t border-brand-navy/10 mt-6 flex items-center justify-between">
+            <span class="text-xs text-brand-dark/60">分班制 (最多5人)</span>
+            <span class="text-sm font-bold text-brand-coral">低至 $1600/月</span>
+          </div>
+        </div>
+
+        <!-- 課程 3 -->
+        <div class="bg-[#FDFBF7] p-6 rounded-2xl border-2 border-brand-navy hover:-translate-y-1 transition duration-300 flex flex-col justify-between">
+          <div class="space-y-4">
+            <span class="inline-block px-3 py-1 bg-brand-coral/10 text-brand-coral text-xs font-bold rounded-md">留學專研</span>
+            <h3 class="text-xl font-bold text-brand-navy">雅思 / PTE 搶分小班</h3>
+            <p class="text-xs text-brand-dark/70 leading-relaxed">
+              掌握考試技巧與關鍵口寫核心架構，助力輕鬆邁向國際殿堂。
+            </p>
+          </div>
+          <div class="pt-6 border-t border-brand-navy/10 mt-6 flex items-center justify-between">
+            <span class="text-xs text-brand-dark/60">提供一對一口試模考</span>
+            <span class="text-sm font-bold text-brand-coral">熱烈招生</span>
+          </div>
+        </div>
+
+        <!-- 課程 4 -->
+        <div class="bg-[#FDFBF7] p-6 rounded-2xl border-2 border-brand-navy hover:-translate-y-1 transition duration-300 flex flex-col justify-between">
+          <div class="space-y-4">
+            <span class="inline-block px-3 py-1 bg-brand-navy/10 text-brand-navy text-xs font-bold rounded-md">保送專修</span>
+            <h3 class="text-xl font-bold text-brand-navy">四校聯考與升學保送</h3>
+            <p class="text-xs text-brand-dark/70 leading-relaxed">
+              國內、澳門本土大學入學試深度輔導，精準口面試與自薦文書。
+            </p>
+          </div>
+          <div class="pt-6 border-t border-brand-navy/10 mt-6 flex items-center justify-between">
+            <span class="text-xs text-brand-dark/60">全方位客製規劃</span>
+            <span class="text-sm font-bold text-brand-coral">預約即測</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== INTERACTIVE TUITION CALCULATOR ==================== -->
+  <section id="calculator" class="py-20 lg:py-28 bg-[#F5ECE0]/30 border-y border-brand-navy/5 relative overflow-hidden">
+    <!-- 滑動時會有路徑漸亮效果的裝飾 SVG -->
+    <div class="absolute inset-0 pointer-events-none z-0">
+      <svg class="parallax-svg absolute left-10 bottom-10 w-48 h-48 text-brand-navy/5" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+        <path class="draw-path-target" d="M10,10 C40,50 60,0 90,90" />
+      </svg>
+    </div>
+
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
+      
+      <div class="text-center space-y-4 mb-12">
+        <span class="text-brand-coral font-bold tracking-wider text-sm block">TUITION ESTIMATOR</span>
+        <h2 class="text-3xl font-serif font-bold text-brand-navy">
+          學費精算與同行優惠估算
+        </h2>
+        <p class="text-sm text-brand-dark/70">
+          「二人同行，一人七折」或「多人同行低至 $120/小時」！來算算您可以享受多少省錢特惠吧！
+        </p>
+      </div>
+
+      <!-- 計算器主體卡片 -->
+      <div class="bg-white rounded-3xl retro-border p-6 sm:p-10 space-y-8">
+        
+        <!-- 步驟 1: 選擇課程類型 -->
+        <div class="space-y-3">
+          <label class="block text-sm font-bold text-brand-navy uppercase tracking-wider">第一步：選擇您感興趣的課程類型</label>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <button onclick="selectCalcCourse('math', 1600, 150)" id="btn-math" class="calc-course-btn p-4 rounded-xl border-2 border-brand-navy bg-brand-navy text-white font-bold text-left transition flex items-center justify-between">
+              <div>
+                <span class="block text-base">中/小學數學班</span>
+                <span class="text-xs opacity-80 mt-1 block">原價 $1,600 / 月</span>
+              </div>
+              <iconify-icon icon="lucide:check-circle-2" class="text-xl text-brand-gold"></iconify-icon>
+            </button>
+            
+            <button onclick="selectCalcCourse('general', 1400, 130)" id="btn-general" class="calc-course-btn p-4 rounded-xl border-2 border-brand-navy/10 bg-white text-brand-navy hover:border-brand-navy/40 font-bold text-left transition flex items-center justify-between">
+              <div>
+                <span class="block text-base">中小學全科輔導</span>
+                <span class="text-xs text-brand-dark/60 mt-1 block">原價 $1,400 / 月</span>
+              </div>
+              <iconify-icon icon="lucide:circle" class="text-xl opacity-20"></iconify-icon>
+            </button>
+
+            <button onclick="selectCalcCourse('language', 2200, 180)" id="btn-language" class="calc-course-btn p-4 rounded-xl border-2 border-brand-navy/10 bg-white text-brand-navy hover:border-brand-navy/40 font-bold text-left transition flex items-center justify-between">
+              <div>
+                <span class="block text-base">雅思 / PTE 特訓</span>
+                <span class="text-xs text-brand-dark/60 mt-1 block">原價 $2,200 / 月</span>
+              </div>
+              <iconify-icon icon="lucide:circle" class="text-xl opacity-20"></iconify-icon>
+            </button>
+          </div>
+        </div>
+
+        <!-- 步驟 2: 設定同行人數 -->
+        <div class="space-y-4">
+          <div class="flex justify-between items-center">
+            <label class="text-sm font-bold text-brand-navy uppercase tracking-wider">第二步：選擇同行上課人數</label>
+            <span id="people-badge" class="px-3 py-1 bg-brand-coral text-white text-xs font-bold rounded-full">享受「二人同行，一人7折」</span>
+          </div>
+          
+          <!-- 滑桿或計數器 -->
+          <div class="flex items-center space-x-6 bg-brand-cream p-4 rounded-xl border border-brand-navy/10">
+            <button onclick="updatePeople(-1)" class="w-10 h-10 rounded-lg bg-white border border-brand-navy/20 flex items-center justify-center font-bold text-lg hover:bg-brand-navy/5">-</button>
+            <div class="text-center min-w-[60px]">
+              <span id="people-count" class="text-3xl font-bold text-brand-navy">2</span>
+              <span class="text-xs text-brand-dark/70 block font-semibold">人同行</span>
+            </div>
+            <button onclick="updatePeople(1)" class="w-10 h-10 rounded-lg bg-white border border-brand-navy/20 flex items-center justify-center font-bold text-lg hover:bg-brand-navy/5">+</button>
+            
+            <p class="text-xs text-brand-dark/60 hidden sm:block">提示：2人同行即享其中一人月費 7 折優惠；3人以上多人同行享更低時費方案！</p>
+          </div>
+        </div>
+
+        <!-- 估計結果區域 -->
+        <div class="bg-brand-navy p-6 rounded-2xl text-white space-y-4">
+          <div class="grid grid-cols-2 gap-4 divide-x divide-white/10 text-center">
+            <div>
+              <span class="text-xs text-white/70 block font-medium">預估平均每人月費</span>
+              <span id="result-monthly" class="text-2xl sm:text-3xl font-bold text-brand-gold">$1,360</span>
+              <span class="text-xs text-white/50">/ 月</span>
+            </div>
+            <div>
+              <span class="text-xs text-white/70 block font-medium">同行總共節省</span>
+              <span id="result-savings" class="text-2xl sm:text-3xl font-bold text-brand-coral">$480</span>
+              <span class="text-xs text-white/50">/ 月</span>
+            </div>
+          </div>
+          
+          <div class="text-center pt-2 border-t border-white/10">
+            <span class="inline-block text-xs text-brand-gold font-semibold">
+              *多人同行平均時費低至：<strong class="text-sm font-black text-white" id="result-hourly">$120</strong> / 小時！
+            </span>
+          </div>
+        </div>
+
+        <!-- 計算器 CTA -->
+        <div class="text-center">
+          <button onclick="scrollToElement('diagnostic')" class="px-6 py-3 bg-brand-gold text-brand-navy font-bold rounded-xl retro-border-interactive">
+            立即鎖定此同行優惠方案 ➜
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== THREE-STEP ONLINE DIAGNOSIS ==================== -->
+  <section id="diagnostic" class="py-20 lg:py-28 bg-white relative overflow-hidden">
+    <!-- 滑動時繪製的小花朵裝飾 SVG -->
+    <div class="absolute inset-0 pointer-events-none z-0">
+      <svg class="parallax-svg absolute right-12 top-10 w-32 h-32 text-brand-coral/10" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+        <path class="draw-path-target" d="M50,30 C45,15 30,15 30,30 C30,45 45,45 50,30 Z M50,30 C55,15 70,15 70,30 C70,45 55,45 50,30 Z" />
+      </svg>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 relative z-10">
+      
+      <div class="text-center space-y-4 mb-12">
+        <span class="text-brand-coral font-bold tracking-wider text-sm block">1-MINUTE ASSESSMENT</span>
+        <h2 class="text-3xl font-serif font-bold text-brand-navy">一分鐘在線學力自我檢測</h2>
+        <p class="text-sm text-brand-dark/70">
+          完成 3 個簡單問題，我們將為您自動分析學習瓶頸，並立即贈送一對一實體學力免費評估及 **$200 學費折抵券**！
+        </p>
+      </div>
+
+      <!-- 互動 Quiz 表單 -->
+      <div class="bg-brand-cream/80 border-2 border-brand-navy rounded-3xl p-6 sm:p-10 relative">
+        
+        <!-- 進度條 -->
+        <div class="w-full bg-brand-navy/10 h-2 rounded-full mb-8 overflow-hidden">
+          <div id="quiz-progress" class="bg-brand-coral h-full w-1/3 transition-all duration-500"></div>
+        </div>
+
+        <form id="quizForm" onsubmit="handleQuizSubmit(event)">
+          
+          <!-- 問題 1 -->
+          <div id="step-1" class="quiz-step space-y-6">
+            <h3 class="text-xl font-bold text-brand-navy flex items-center space-x-2">
+              <span class="w-7 h-7 rounded-full bg-brand-navy text-white text-xs flex items-center justify-center">1</span>
+              <span>您目前的就讀年級是？</span>
+            </h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <label class="quiz-option p-4 bg-white rounded-xl border border-brand-navy/10 hover:border-brand-navy cursor-pointer flex items-center space-x-3">
+                <input type="radio" name="grade" value="primary" required class="text-brand-coral focus:ring-brand-coral">
+                <span class="font-bold text-brand-navy">小學 (P1 - P6)</span>
+              </label>
+              <label class="quiz-option p-4 bg-white rounded-xl border border-brand-navy/10 hover:border-brand-navy cursor-pointer flex items-center space-x-3">
+                <input type="radio" name="grade" value="junior-high" class="text-brand-coral focus:ring-brand-coral">
+                <span class="font-bold text-brand-navy">初中 (F1 - F3)</span>
+              </label>
+              <label class="quiz-option p-4 bg-white rounded-xl border border-brand-navy/10 hover:border-brand-navy cursor-pointer flex items-center space-x-3">
+                <input type="radio" name="grade" value="senior-high" class="text-brand-coral focus:ring-brand-coral">
+                <span class="font-bold text-brand-navy">高中 (F4 - F6)</span>
+              </label>
+              <label class="quiz-option p-4 bg-white rounded-xl border border-brand-navy/10 hover:border-brand-navy cursor-pointer flex items-center space-x-3">
+                <input type="radio" name="grade" value="other" class="text-brand-coral focus:ring-brand-coral">
+                <span class="font-bold text-brand-navy">其他 (如：轉學生、特殊衝刺)</span>
+              </label>
+            </div>
+            <div class="flex justify-end pt-4">
+              <button type="button" onclick="goQuizStep(2)" class="px-6 py-3 bg-brand-navy text-white font-bold rounded-lg hover:bg-brand-navy/90 transition">
+                下一題 ➜
+              </button>
+            </div>
+          </div>
+
+          <!-- 問題 2 -->
+          <div id="step-2" class="quiz-step space-y-6 hidden">
+            <h3 class="text-xl font-bold text-brand-navy flex items-center space-x-2">
+              <span class="w-7 h-7 rounded-full bg-brand-navy text-white text-xs flex items-center justify-center">2</span>
+              <span>目前最大的學業瓶頸是？</span>
+            </h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <label class="quiz-option p-4 bg-white rounded-xl border border-brand-navy/10 hover:border-brand-navy cursor-pointer flex items-center space-x-3">
+                <input type="checkbox" name="painpoint" value="conceptual" class="text-brand-coral focus:ring-brand-coral rounded">
+                <span class="font-bold text-brand-navy">觀念模糊、死記硬背</span>
+              </label>
+              <label class="quiz-option p-4 bg-white rounded-xl border border-brand-navy/10 hover:border-brand-navy cursor-pointer flex items-center space-x-3">
+                <input type="checkbox" name="painpoint" value="exams" class="text-brand-coral focus:ring-brand-coral rounded">
+                <span class="font-bold text-brand-navy">考試時間不夠、粗心失分</span>
+              </label>
+              <label class="quiz-option p-4 bg-white rounded-xl border border-brand-navy/10 hover:border-brand-navy cursor-pointer flex items-center space-x-3">
+                <input type="checkbox" name="painpoint" value="motivation" class="text-brand-coral focus:ring-brand-coral rounded">
+                <span class="font-bold text-brand-navy">缺乏自主學習動力與習慣</span>
+              </label>
+              <label class="quiz-option p-4 bg-white rounded-xl border border-brand-navy/10 hover:border-brand-navy cursor-pointer flex items-center space-x-3">
+                <input type="checkbox" name="painpoint" value="english" class="text-brand-coral focus:ring-brand-coral rounded">
+                <span class="font-bold text-brand-navy">英文/數學英文版理解吃力</span>
+              </label>
+            </div>
+            <div class="flex justify-between pt-4">
+              <button type="button" onclick="goQuizStep(1)" class="px-6 py-3 bg-white text-brand-navy border border-brand-navy/20 font-bold rounded-lg hover:bg-brand-navy/5 transition">
+                上一題
+              </button>
+              <button type="button" onclick="goQuizStep(3)" class="px-6 py-3 bg-brand-navy text-white font-bold rounded-lg hover:bg-brand-navy/90 transition">
+                最後一步 ➜
+              </button>
+            </div>
+          </div>
+
+          <!-- 問題 3 -->
+          <div id="step-3" class="quiz-step space-y-6 hidden">
+            <h3 class="text-xl font-bold text-brand-navy flex items-center space-x-2">
+              <span class="w-7 h-7 rounded-full bg-brand-navy text-white text-xs flex items-center justify-center">3</span>
+              <span>您的聯絡資訊以接收客製分析結果：</span>
+            </h3>
+            <div class="space-y-4">
+              <div>
+                <label class="block text-xs font-bold text-brand-navy/80 mb-1">學生/家長姓名</label>
+                <input type="text" id="quiz-name" required placeholder="例如：李小明 / 李媽媽" class="w-full px-4 py-3 rounded-xl border border-brand-navy/20 focus:border-brand-navy focus:ring-1 focus:ring-brand-navy outline-none">
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-brand-navy/80 mb-1">手機號碼 (WhatsApp/微信)</label>
+                <input type="tel" id="quiz-phone" required placeholder="例如：(+853) 6212-7420" class="w-full px-4 py-3 rounded-xl border border-brand-navy/20 focus:border-brand-navy focus:ring-1 focus:ring-brand-navy outline-none">
+              </div>
+              <p class="text-[11px] text-brand-dark/50">
+                *我們極度重視隱私安全，您填寫的資料僅供柏萊教育中心教務主任聯絡您確認學力診斷細節與發送 $200 學費折扣券使用。
+              </p>
+            </div>
+            <div class="flex justify-between pt-4">
+              <button type="button" onclick="goQuizStep(2)" class="px-6 py-3 bg-white text-brand-navy border border-brand-navy/20 font-bold rounded-lg hover:bg-brand-navy/5 transition">
+                上一題
+              </button>
+              <button type="submit" class="px-8 py-3 bg-brand-coral text-white font-bold rounded-lg retro-border-interactive">
+                送出並解鎖我的 $200 優惠 ➜
+              </button>
+            </div>
+          </div>
+
+        </form>
+
+        <!-- 成功提交後的互動動畫顯示 -->
+        <div id="quiz-result" class="hidden text-center py-12 space-y-6">
+          <div class="w-20 h-20 rounded-full bg-green-100 text-green-600 flex items-center justify-center mx-auto animate-bounce">
+            <iconify-icon icon="lucide:check-circle" class="text-5xl"></iconify-icon>
+          </div>
+          <div class="space-y-2">
+            <h3 class="text-2xl font-serif font-bold text-brand-navy">恭喜你，學力診斷與優惠券解鎖成功！</h3>
+            <p class="text-sm text-brand-dark/70">
+              我們的手機端折扣代碼與診斷分析專員將在 24 小時內與您取得聯繫。
+            </p>
+          </div>
+          
+          <!-- 虛擬實體折價券 -->
+          <div class="max-w-md mx-auto bg-white p-6 rounded-2xl border-2 border-dashed border-brand-coral relative overflow-hidden shadow-md">
+            <div class="absolute -left-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-brand-cream rounded-full"></div>
+            <div class="absolute -right-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-brand-cream rounded-full"></div>
+            
+            <div class="text-left space-y-3">
+              <div class="flex justify-between items-center">
+                <span class="text-xs font-bold text-brand-navy/50">PERKY EDUCATION</span>
+                <span class="text-xs font-bold text-brand-coral">限時網頁專屬</span>
+              </div>
+              <h4 class="text-2xl font-bold text-brand-navy">免費學力評估 + $200 學費減免</h4>
+              <p class="text-xs text-brand-dark/70">
+                可抵用小班/一對一、中學數學提升、雅思及各科課程學費乙次。
+              </p>
+              <div class="pt-3 border-t border-dashed border-brand-navy/10 flex justify-between items-center">
+                <span class="text-[11px] text-brand-dark/50">憑此畫面至南灣教育中心諮詢可享折抵</span>
+                <span class="text-sm font-mono font-black text-brand-navy bg-brand-gold/25 px-2 py-1 rounded">PK200OFF</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-4">
+            <button onclick="resetQuiz()" class="text-xs text-brand-navy hover:underline font-bold">重新填寫</button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== LOCATION & CONTACT SECTION ==================== -->
+  <section class="py-20 lg:py-28 bg-[#F5ECE0]/30 border-t border-brand-navy/5 relative overflow-hidden">
+    <!-- 滑動時會有小波紋效果的裝飾 SVG -->
+    <div class="absolute inset-0 pointer-events-none z-0">
+      <svg class="parallax-svg absolute left-5 bottom-12 w-32 h-32 text-brand-gold/15" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5">
+        <circle class="draw-path-target" cx="50" cy="50" r="35" stroke-dasharray="5 5" />
+      </svg>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <!-- 左側聯絡資訊與 QR 碼 -->
+        <div class="lg:col-span-6 space-y-8">
+          <div class="space-y-4">
+            <span class="text-brand-coral font-bold uppercase tracking-wider text-sm block">CONTACT US</span>
+            <h2 class="text-3xl sm:text-4xl font-serif font-bold text-brand-navy">隨時聯絡，歡迎參觀中心</h2>
+            <p class="text-sm text-brand-dark/70 leading-relaxed font-medium">
+              柏萊教育中心位於澳門繁華的核心商业區——南灣時代商業中心。我們提供舒適寬敞的無壓力自學與學習空間。歡迎透過以下方式聯絡我們，或掃描二維碼線上預約！
+            </p>
+          </div>
+
+          <!-- 詳細清單 -->
+          <div class="space-y-4">
+            <div class="flex items-start space-x-3">
+              <div class="w-10 h-10 rounded-lg bg-brand-navy/5 flex items-center justify-center shrink-0 mt-1">
+                <iconify-icon icon="ph:map-pin-fill" class="text-xl text-brand-navy"></iconify-icon>
+              </div>
+              <div>
+                <h4 class="font-bold text-sm text-brand-navy">中心地址</h4>
+                <p class="text-sm text-brand-dark/80 font-medium">澳門南灣時代商業中心 7 樓 H (財政局旁)</p>
+              </div>
+            </div>
+
+            <div class="flex items-start space-x-3">
+              <div class="w-10 h-10 rounded-lg bg-brand-navy/5 flex items-center justify-center shrink-0 mt-1">
+                <iconify-icon icon="ph:phone-call-fill" class="text-xl text-brand-navy"></iconify-icon>
+              </div>
+              <div>
+                <h4 class="font-bold text-sm text-brand-navy">聯絡電話</h4>
+                <p class="text-sm text-brand-dark/80 font-medium">(+853) 6212 7420</p>
+              </div>
+            </div>
+
+            <div class="flex items-start space-x-3">
+              <div class="w-10 h-10 rounded-lg bg-brand-navy/5 flex items-center justify-center shrink-0 mt-1">
+                <iconify-icon icon="ph:clock-bold" class="text-xl text-brand-navy"></iconify-icon>
+              </div>
+              <div>
+                <h4 class="font-bold text-sm text-brand-navy">營業時間</h4>
+                <p class="text-sm text-brand-dark/80 font-medium">週一至週五：14:00 - 21:00｜週六至週日：09:00 - 18:00</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 互動式四大社群二維碼模塊 -->
+          <div class="bg-white p-6 rounded-2xl border border-brand-navy/10 space-y-4">
+            <h4 class="font-bold text-sm text-brand-navy text-center sm:text-left">請掃碼在各大社群與我們線上探討</h4>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+              <div class="space-y-2 flex flex-col items-center">
+                <div class="w-20 h-20 bg-brand-cream border border-brand-navy/10 rounded-lg p-1">
+                  <!-- 模擬 WeChat 碼 -->
+                  <div class="w-full h-full bg-gradient-to-tr from-green-500 to-emerald-600 rounded flex items-center justify-center text-white">
+                    <iconify-icon icon="ic:baseline-wechat" class="text-3xl"></iconify-icon>
+                  </div>
+                </div>
+                <span class="text-xs font-bold text-brand-navy block">WeChat</span>
+              </div>
+              
+              <div class="space-y-2 flex flex-col items-center">
+                <div class="w-20 h-20 bg-brand-cream border border-brand-navy/10 rounded-lg p-1">
+                  <!-- 模擬 小紅書 碼 -->
+                  <div class="w-full h-full bg-gradient-to-tr from-red-500 to-rose-600 rounded flex items-center justify-center text-white">
+                    <span class="text-sm font-black font-serif">小紅書</span>
+                  </div>
+                </div>
+                <span class="text-xs font-bold text-brand-navy block">小紅書</span>
+              </div>
+
+              <div class="space-y-2 flex flex-col items-center">
+                <div class="w-20 h-20 bg-brand-cream border border-brand-navy/10 rounded-lg p-1">
+                  <!-- 模擬 Instagram 碼 -->
+                  <div class="w-full h-full bg-gradient-to-tr from-pink-500 to-orange-500 rounded flex items-center justify-center text-white">
+                    <iconify-icon icon="ph:instagram-logo-fill" class="text-3xl"></iconify-icon>
+                  </div>
+                </div>
+                <span class="text-xs font-bold text-brand-navy block">Instagram</span>
+              </div>
+
+              <div class="space-y-2 flex flex-col items-center">
+                <div class="w-20 h-20 bg-brand-cream border border-brand-navy/10 rounded-lg p-1">
+                  <!-- 模擬 Facebook 碼 -->
+                  <div class="w-full h-full bg-gradient-to-tr from-blue-600 to-indigo-700 rounded flex items-center justify-center text-white">
+                    <iconify-icon icon="ph:facebook-logo-fill" class="text-3xl"></iconify-icon>
+                  </div>
+                </div>
+                <span class="text-xs font-bold text-brand-navy block">Facebook</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 右側地圖示意區 -->
+        <div class="lg:col-span-6 relative">
+          <div class="absolute inset-0 bg-brand-navy rounded-3xl transform rotate-1 scale-95 opacity-5"></div>
+          <div class="relative rounded-2xl overflow-hidden retro-border bg-white p-4">
+            
+            <!-- 模擬精緻地圖卡片 -->
+            <div class="w-full h-[360px] bg-slate-100 rounded-lg relative overflow-hidden flex items-center justify-center">
+              
+              <!-- 抽象地圖背景網格 -->
+              <div class="absolute inset-0 opacity-20" style="background-image: linear-gradient(#102A6B 1px, transparent 1px), linear-gradient(90deg, #102A6B 1px, transparent 1px); background-size: 20px 20px;"></div>
+              
+              <!-- 象徵性的大道與建築標籤 -->
+              <div class="absolute inset-x-0 top-1/3 h-8 bg-white/60 flex items-center justify-center font-bold text-xs tracking-wider text-brand-dark/40 transform -rotate-2">南灣大馬路 Av. D. João IV</div>
+              <div class="absolute inset-y-0 left-1/3 w-8 bg-white/60 flex items-center justify-center font-bold text-xs tracking-wider text-brand-dark/40 transform rotate-45">約翰四世大馬路</div>
+
+              <!-- 關鍵地標 -->
+              <div class="absolute top-10 left-10 bg-white/80 px-3 py-1.5 rounded-lg border border-brand-navy/10 text-xs font-bold text-brand-dark/70">
+                🏢 澳門特別行政區財政局
+              </div>
+              <div class="absolute bottom-12 right-12 bg-white/80 px-3 py-1.5 rounded-lg border border-brand-navy/10 text-xs font-bold text-brand-dark/70">
+                🏫 澳門聖羅撒女子中學
+              </div>
+
+              <!-- 中心主標註點 -->
+              <div class="relative z-10 flex flex-col items-center">
+                <!-- 地標波紋動畫 -->
+                <div class="absolute -top-3 w-10 h-10 rounded-full bg-brand-coral/25 animate-ping"></div>
+                <div class="w-8 h-8 rounded-full bg-brand-coral text-white flex items-center justify-center shadow-md border-2 border-white relative z-10">
+                  <iconify-icon icon="ph:student-fill" class="text-sm"></iconify-icon>
+                </div>
+                <div class="mt-2 bg-brand-navy text-white px-4 py-2 rounded-xl text-xs font-bold shadow-lg text-center whitespace-nowrap retro-border">
+                  <span class="block">柏萊教育中心</span>
+                  <span class="text-[10px] text-brand-gold font-semibold">南灣時代商業中心 7 樓 H</span>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- 自行車導航或巴士引導 -->
+            <div class="grid grid-cols-2 gap-4 mt-4 text-xs font-semibold text-brand-navy/80">
+              <div class="bg-brand-cream p-3 rounded-xl border border-brand-navy/10 flex items-center space-x-2">
+                <iconify-icon icon="fluent:bus-24-regular" class="text-lg text-brand-coral shrink-0"></iconify-icon>
+                <span>附近巴士：南灣大馬路站、約翰四世大馬路站</span>
+              </div>
+              <div class="bg-brand-cream p-3 rounded-xl border border-brand-navy/10 flex items-center space-x-2">
+                <iconify-icon icon="fluent:person-board-24-regular" class="text-lg text-brand-gold shrink-0"></iconify-icon>
+                <span>下車步行只需 3 ~ 5 分鐘即達！</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="bg-brand-navy text-white py-12 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-12 border-b border-white/10">
+        
+        <!-- 品牌區 -->
+        <div class="space-y-4 md:col-span-2">
+          <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 rounded-full bg-white text-brand-navy flex items-center justify-center font-black">
+              P
+            </div>
+            <div>
+              <span class="font-serif text-xl font-bold tracking-tight block">柏萊教育</span>
+              <span class="text-[10px] uppercase tracking-widest text-brand-gold block font-bold">PERKY EDUCATION</span>
+            </div>
+          </div>
+          <p class="text-sm text-white/70 max-w-sm">
+            我們以澳門學生的卓越未來為己任。不只是輔導，更是全程溫暖相伴的學術加速器。
+          </p>
+          <p class="text-xs text-brand-gold italic font-bold">
+            "We work to achieve the success of every student."
+          </p>
+        </div>
+
+        <!-- 導航連結 -->
+        <div class="space-y-3">
+          <h4 class="font-bold text-sm tracking-wider uppercase text-brand-gold">網站導航</h4>
+          <ul class="space-y-2 text-sm text-white/70 font-medium">
+            <li><a href="#services" class="hover:text-brand-gold transition">核心服務</a></li>
+            <li><a href="#features" class="hover:text-brand-gold transition">為什麼選擇我們</a></li>
+            <li><a href="#courses" class="hover:text-brand-gold transition">熱門課程</a></li>
+            <li><a href="#calculator" class="hover:text-brand-gold transition">學費精算</a></li>
+          </ul>
+        </div>
+
+        <!-- 官方聯絡 -->
+        <div class="space-y-3">
+          <h4 class="font-bold text-sm tracking-wider uppercase text-brand-gold">官方聯絡</h4>
+          <p class="text-sm text-white/70">
+            📞 (+853) 6212-7420
+          </p>
+          <p class="text-sm text-white/70">
+            📍 澳門南灣時代商業中心 7 樓 H (財政局旁)
+          </p>
+        </div>
+
+      </div>
+
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/40 font-semibold">
+        <p>© 2026 澳門柏萊教育中心 PERKY EDUCATION. All Rights Reserved.</p>
+        <p>網站設計與交互由 網頁專家 獨家打造</p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ==================== POPUP PROMO MODAL ==================== -->
+  <div id="promoModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-brand-navy/60 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300">
+    <div class="bg-[#FDFBF7] rounded-3xl retro-border max-w-md w-full p-6 sm:p-8 relative transform scale-90 transition-all duration-300">
+      
+      <!-- 關閉按鈕 -->
+      <button onclick="closePromoModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-brand-navy/5 text-brand-navy flex items-center justify-center hover:bg-brand-navy/10 transition">
+        <iconify-icon icon="lucide:x" class="text-lg"></iconify-icon>
+      </button>
+
+      <!-- 驚喜折價券樣式 -->
+      <div class="text-center space-y-6">
+        <div class="w-16 h-16 rounded-full bg-brand-gold/25 text-brand-gold flex items-center justify-center mx-auto">
+          <iconify-icon icon="fluent:gift-24-regular" class="text-4xl"></iconify-icon>
+        </div>
+        
+        <div class="space-y-2">
+          <span class="text-xs uppercase tracking-widest text-brand-coral font-bold block">限時網頁尊享</span>
+          <h3 class="text-2xl font-serif font-bold text-brand-navy">
+            領取 $200 學費減免券
+          </h3>
+          <p class="text-xs text-brand-dark/70 leading-relaxed max-w-xs mx-auto">
+            立即預約一場免費的一對一學力診斷，即可免費獲得首月學費減免折抵券！
+          </p>
+        </div>
+
+        <div class="bg-brand-navy p-4 rounded-xl text-white text-left space-y-2">
+          <span class="text-[10px] text-white/60 block font-bold">網頁專用禮遇碼</span>
+          <div class="flex justify-between items-center">
+            <span class="text-lg font-mono font-black text-brand-gold">PK200OFF</span>
+            <button onclick="copyPromoCode('PK200OFF')" class="px-3 py-1 bg-white/10 hover:bg-white/20 text-xs font-bold rounded transition">
+              複製代碼
+            </button>
+          </div>
+        </div>
+
+        <button onclick="scrollToElement('diagnostic'); closePromoModal();" class="w-full py-3 bg-brand-coral text-white font-bold rounded-xl retro-border-interactive">
+          立即去在線診斷領取 ➜
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==================== JAVASCRIPT LOGIC ==================== -->
+  <script>
+    // 註冊 GSAP ScrollTrigger 插件以實現手繪路徑與視差滑動效果
+    gsap.registerPlugin(ScrollTrigger);
+
+    window.addEventListener('DOMContentLoaded', () => {
+      // 1. 基礎 Hero Shape 的隨機慢速飄浮
+      gsap.to('.hero-shape', {
+        y: 'random(-20, 20)',
+        x: 'random(-15, 15)',
+        rotation: 'random(-10, 10)',
+        duration: 'random(3, 5)',
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut'
+      });
+
+      // 2. 背景裝飾手繪 SVG 路徑在滾動時自動繪出 (Draw Stroke Dashoffset Animation)
+      document.querySelectorAll('.draw-path-target').forEach((path) => {
+        // 獲取並動態設定每一條 SVG 路徑的長度
+        const pathLength = path.getTotalLength();
+        gsap.set(path, {
+          strokeDasharray: pathLength,
+          strokeDashoffset: pathLength
+        });
+
+        // 建立滾動觸發動畫
+        gsap.to(path, {
+          strokeDashoffset: 0,
+          duration: 1.5,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: path,
+            start: 'top 85%', // 當路徑進入螢幕底部 85% 時觸發
+            end: 'bottom 20%',
+            toggleActions: 'play none none none',
+            once: true // 僅繪製一次
+          }
+        });
+      });
+
+      // 3. 背景插畫與裝飾 SVG 在滑動時的視差位移 (Parallax Effect)
+      document.querySelectorAll('.parallax-svg').forEach((el) => {
+        gsap.to(el, {
+          y: 'random(-40, -80)', // 向上視差移動
+          rotation: 'random(-15, 15)',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 1.5 // 平滑滾動追隨
+          }
+        });
+      });
+
+      // 4. 服務卡片與區塊內容的滾動滑入微動
+      gsap.from('#services .retro-border-interactive', {
+        opacity: 0,
+        y: 40,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '#services',
+          start: 'top 75%'
+        }
+      });
+
+      gsap.from('#features .retro-border', {
+        opacity: 0,
+        x: 50,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '#features',
+          start: 'top 75%'
+        }
+      });
+    });
+
+    // ===== 錨點平滑滾動 =====
+    function scrollToElement(id) {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    // ===== 學費精算器邏輯 =====
+    let currentCoursePrice = 1600;
+    let currentCourseHourly = 150;
+    let currentPeople = 2;
+
+    function selectCalcCourse(type, monthly, hourly) {
+      currentCoursePrice = monthly;
+      currentCourseHourly = hourly;
+      
+      // 更新按鈕樣式
+      document.querySelectorAll('.calc-course-btn').forEach(btn => {
+        btn.classList.remove('bg-brand-navy', 'text-white');
+        btn.classList.add('bg-white', 'text-brand-navy', 'border-brand-navy/10');
+        const icon = btn.querySelector('iconify-icon');
+        if (icon) {
+          icon.setAttribute('icon', 'lucide:circle');
+          icon.classList.remove('text-brand-gold', 'opacity-100');
+          icon.classList.add('opacity-20');
+        }
+      });
+
+      const selectedBtn = document.getElementById(`btn-${type}`);
+      if (selectedBtn) {
+        selectedBtn.classList.remove('bg-white', 'text-brand-navy', 'border-brand-navy/10');
+        selectedBtn.classList.add('bg-brand-navy', 'text-white');
+        const icon = selectedBtn.querySelector('iconify-icon');
+        if (icon) {
+          icon.setAttribute('icon', 'lucide:check-circle-2');
+          icon.classList.remove('opacity-20');
+          icon.classList.add('text-brand-gold', 'opacity-100');
+        }
+      }
+
+      calculateTuition();
+    }
+
+    function updatePeople(change) {
+      const newCount = currentPeople + change;
+      if (newCount >= 1 && newCount <= 10) {
+        currentPeople = newCount;
+        document.getElementById('people-count').innerText = currentPeople;
+        calculateTuition();
+      }
+    }
+
+    function calculateTuition() {
+      const badge = document.getElementById('people-badge');
+      let monthlyPerPerson = currentCoursePrice;
+      let totalSavings = 0;
+      let hourlyRate = currentCourseHourly;
+
+      if (currentPeople === 1) {
+        badge.innerText = '單人精緻特訓';
+        badge.className = 'px-3 py-1 bg-brand-navy text-white text-xs font-bold rounded-full';
+        monthlyPerPerson = currentCoursePrice;
+        totalSavings = 0;
+        hourlyRate = currentCourseHourly;
+      } else if (currentPeople === 2) {
+        badge.innerText = '二人同行，一人7折！';
+        badge.className = 'px-3 py-1 bg-brand-coral text-white text-xs font-bold rounded-full';
+        
+        // 總月費 = 1份原價 + 1份7折
+        const totalMonthly = currentCoursePrice + (currentCoursePrice * 0.7);
+        monthlyPerPerson = Math.round(totalMonthly / 2);
+        totalSavings = currentCoursePrice * 0.3;
+        hourlyRate = Math.round(currentCourseHourly * 0.85);
+      } else {
+        // 多人同行優惠 (3人及以上)
+        badge.innerText = `多人同行享超值時費特惠！`;
+        badge.className = 'px-3 py-1 bg-brand-gold text-brand-navy text-xs font-bold rounded-full';
+        
+        // 平均省20%
+        monthlyPerPerson = Math.round(currentCoursePrice * 0.8);
+        totalSavings = Math.round((currentCoursePrice * 0.2) * currentPeople);
+        // 時費低至 120/小時 的折扣邏輯
+        hourlyRate = Math.max(120, Math.round(currentCourseHourly * 0.75));
+      }
+
+      document.getElementById('result-monthly').innerText = `$${monthlyPerPerson}`;
+      document.getElementById('result-savings').innerText = `$${totalSavings}`;
+      document.getElementById('result-hourly').innerText = `$${hourlyRate}`;
+    }
+
+    // ===== 三步驟 Quiz 邏輯 =====
+    let currentQuizStep = 1;
+    function goQuizStep(step) {
+      if (step === 2) {
+        // 檢查步驟 1 是否有填
+        const gradeChecked = document.querySelector('input[name="grade"]:checked');
+        if (!gradeChecked) {
+          showNotification('請先選擇您的就讀年級！');
+          return;
+        }
+      }
+      
+      if (step === 3) {
+        // 檢查步驟 2 是否有選 checkbox
+        const painpoints = document.querySelectorAll('input[name="painpoint"]:checked');
+        if (painpoints.length === 0) {
+          showNotification('請至少選擇一項您目前面臨的學習瓶頸！');
+          return;
+        }
+      }
+
+      currentQuizStep = step;
+      document.querySelectorAll('.quiz-step').forEach(el => el.classList.add('hidden'));
+      document.getElementById(`step-${step}`).classList.remove('hidden');
+
+      // 更新進度條
+      const progressWidth = (step / 3) * 100;
+      document.getElementById('quiz-progress').style.width = `${progressWidth}%`;
+    }
+
+    function handleQuizSubmit(event) {
+      event.preventDefault();
+      
+      // 獲取數據
+      const name = document.getElementById('quiz-name').value;
+      const phone = document.getElementById('quiz-phone').value;
+
+      if (!name || !phone) {
+        showNotification('請填寫完整姓名與手機號碼！');
+        return;
+      }
+
+      // 隱藏表單步驟，顯示成功折價券
+      document.getElementById('quizForm').classList.add('hidden');
+      document.getElementById('quiz-result').classList.remove('hidden');
+      document.getElementById('quiz-progress').parentElement.classList.add('hidden');
+    }
+
+    function resetQuiz() {
+      document.getElementById('quizForm').reset();
+      document.getElementById('quizForm').classList.remove('hidden');
+      document.getElementById('quiz-result').classList.add('hidden');
+      document.getElementById('quiz-progress').parentElement.classList.remove('hidden');
+      goQuizStep(1);
+    }
+
+    // ===== 彈出型模態視窗 =====
+    function openPromoModal() {
+      const modal = document.getElementById('promoModal');
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      modal.querySelector('.transform').classList.remove('scale-90');
+      modal.querySelector('.transform').classList.add('scale-100');
+    }
+
+    function closePromoModal() {
+      const modal = document.getElementById('promoModal');
+      modal.classList.add('opacity-0', 'pointer-events-none');
+      modal.querySelector('.transform').classList.remove('scale-100');
+      modal.querySelector('.transform').classList.add('scale-90');
+    }
+
+    // 複製代碼邏輯 (不使用 alert())
+    function copyPromoCode(text) {
+      const tempInput = document.createElement('input');
+      tempInput.value = text;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempInput);
+      showNotification('✅ 已成功複製禮遇代碼到剪貼簿！');
+    }
+
+    // 自訂優雅的螢幕提示 Notification (替代瀏覽器原生 alert)
+    function showNotification(message) {
+      const container = document.createElement('div');
+      container.className = 'fixed bottom-5 right-5 z-50 bg-brand-navy text-white px-6 py-3.5 rounded-xl retro-border font-bold text-sm shadow-xl transition-all duration-300 transform translate-y-10 opacity-0';
+      container.innerText = message;
+      document.body.appendChild(container);
+
+      // 動態浮現
+      setTimeout(() => {
+        container.classList.remove('translate-y-10', 'opacity-0');
+      }, 50);
+
+      // 自動消退
+      setTimeout(() => {
+        container.classList.add('translate-y-10', 'opacity-0');
+        setTimeout(() => {
+          container.remove();
+        }, 300);
+      }, 3000);
+    }
+  </script>
+</body>
+</html>
